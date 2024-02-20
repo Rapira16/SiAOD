@@ -1,33 +1,35 @@
 #include <iostream>
 using namespace std;
 
-void printArray(int *array, int length){
-    for (int i = 0; i < length; i++){
+void printArray(int* array, int length) {
+    cout << "array = ";
+    for (int i = 0; i < length; i++) {
         cout << array[i] << " ";
     }
-    cout << "\n" << length << endl;
+    cout << "\nlength = " << length << endl;
 }
 
-int *randomNumberArray(int size){
-    int *array = new int[size];
+int* randomNumberArray(int size) {
+    int* array = new int[size];
     srand(time(NULL));
 
-    for(int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        array[i] = rand()%5;
+        array[i] = rand() % 5;
     }
     return array;
 }
 
-void delFirstMethod(int *x, int n, int key){
+void delFirstMethod(int* x, int n, int key) {
     int i = 0;
-    while(i < n) {
+    while (i < n) {
         if (x[i] == key) {
             for (int j = i; j < n - 1; j++) {
                 x[j] = x[j + 1];
             }
             n = n - 1;
-        } else {
+        }
+        else {
             i = i + 1;
         }
     }
@@ -36,11 +38,11 @@ void delFirstMethod(int *x, int n, int key){
 
 }
 
-void delOtherMethod(int *x, int n, int key){
+void delOtherMethod(int* x, int n, int key) {
     int j = 0;
-    for(int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
         x[j] = x[i];
-        if (x[i] != key){
+        if (x[i] != key) {
             j++;
         }
     }
@@ -54,10 +56,10 @@ int main() {
     int size_1 = 10;
     int key_1 = 3;
     int* array_1_random = new int[size_1];
-    
+
     array_1_random = randomNumberArray(size_1);
-    int* array_best = new int[10]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    int* array_worst = new int[10]{3, 3, 3, 3, 3, 3 ,3, 3, 3, 3};
+    int* array_best = new int[10]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    int* array_worst = new int[10]{ 3, 3, 3, 3, 3, 3 ,3, 3, 3, 3 };
 
     delFirstMethod(array_1_random, size_1, key_1);
     cout << "\n";
