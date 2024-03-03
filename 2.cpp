@@ -1,58 +1,68 @@
 #include <iostream>
+#include <chrono>
+using namespace std;
 
-int *randomNumberArray(int &size){
-    int *array = new int[size];
+int* randomNumberArray(int& size) {
+    int* array = new int[size];
     srand(time(nullptr));
 
-    for(int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        array[i] = rand()%5;
+        array[i] = rand() % size;
     }
     return array;
 }
 
-void printArray(int* array, int len){
-    for(int i = 0; i < len; i++){
+void printArray(int* array, int len) {
+    for (int i = 0; i < len; i++) {
         std::cout << array[i] << " ";
     }
 }
 
 void selectionSort(int* data, int lenD)
 {
-    int j = 0;
-    int tmp = 0;
-    for(int i=0; i<lenD; i++){
-        j = i;
-        for(int k = i; k<lenD; k++){
-            if(data[j]>data[k]){
-                j = k;
-            }
+    int key;
+    for (int j = 1; j < lenD; j++) {
+        key = data[j];
+        int i = j - 1;
+        while ((i >= 0) && (data[i] > key)) {
+            data[i + 1] = data[i];
+            i -= 1;
         }
-        tmp = data[i];
-        data[i] = data[j];
-        data[j] = tmp;
+        data[i + 1] = key;
     }
-    printArray(data, lenD);
+    //printArray(data, lenD);
 }
 
 void bubbleSort(int* v, int n) {
-    int i, j;
-    for (i = 0; i < n - 1; i++)
-        // Last i elements are already
-        // in place
-        for (j = 0; j < n - i - 1; j++) {
+    long long count = 0;
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 1; j < n - 1 - i; j++) {
             if (v[j] > v[j + 1]) {
                 int temp = v[j];
-                v[j] = v[j+1];
-                v[j+1] = temp;
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+                count+=3;
             }
+            count++;
         }
-    printArray(v, n);
+        count++;
+    }
+    count++;
+    cout << count;
+    //printArray(v, n);
 }
-int main(){
-    int len = 100;
-    int* arr;
+int main() {
+    int len = 100000;
+    int* arr = new int[len];
     arr = randomNumberArray(len);
+    /*for (int i = 0; i < len; i++) {
+        arr[i] = i;
+    }*/
+    //auto start = chrono::steady_clock::now();
     bubbleSort(arr, len);
+    //auto end = chrono::steady_clock::now();
+    //auto diff = end - start;
+    //cout << chrono::duration <double, milli>(diff).count() << " ms" << endl;
     delete[] arr;
 }
