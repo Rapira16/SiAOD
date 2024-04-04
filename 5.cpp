@@ -48,7 +48,6 @@ void deleteByKey(Node*& head, int key) {
     delete temp;
 }
 
-// Function to create two new lists from the values of the nodes in list L
 void splitList(Node* L, Node*& L1, Node*& L2) {
     Node* curr = L;
     Node* currL1 = nullptr;
@@ -76,7 +75,6 @@ void splitList(Node* L, Node*& L1, Node*& L2) {
     }
 }
 
-// Function to remove all negative elements from list L2
 void removeNegatives(Node*& L2) {
     Node* prev = nullptr;
     Node* curr = L2;
@@ -99,7 +97,6 @@ void removeNegatives(Node*& L2) {
     }
 }
 
-// Function to place the node with the maximum value in L1 before the first node
 void placeMaxNodeBeforeFirst(Node*& L1) {
     if (L1 == nullptr || L1->next == nullptr) {
         return;
@@ -126,7 +123,6 @@ void placeMaxNodeBeforeFirst(Node*& L1) {
     }
 }
 
-// Function to print the list in the console
 void printList(Node* head) {
     Node* curr = head;
     while (curr != nullptr) {
@@ -154,12 +150,23 @@ Node* enterElements() {
 }
 
 int main() {
-    // Creating a sample linked list L
-    Node* L = enterElements();
+    Node* L;
+    char choice;
+    cout << "Do you want to make a list or use a default one(1/2)?" << endl;
+    cin >> choice;
+    if(choice == '2'){
+        pushBack(L,3);
+        pushBack(L,-5);
+        pushBack(L,0);
+        pushBack(L,7);
+        pushBack(L,10);
+        pushBack(L,-6);
+    } else {
+        L = enterElements();
+    }
 
     cout << "L: ";
     printList(L);
-    // Creating two new lists L1 and L2 from the values of the nodes in list L
     Node* L1 = nullptr;
     Node* L2 = nullptr;
     splitList(L, L1, L2);
@@ -170,14 +177,9 @@ int main() {
     cout << "L2 before: ";
     printList(L2);
 
-    deleteByKey(L1, 7);
-    // Removing negative elements from list L2
     removeNegatives(L2);
-
-    // Placing the node with the maximum value in L1 before the first node
     placeMaxNodeBeforeFirst(L1);
 
-    // Displaying the updated lists
     cout << "L1 after: ";
     printList(L1);
 
